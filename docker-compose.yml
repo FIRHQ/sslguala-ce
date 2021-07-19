@@ -1,0 +1,41 @@
+version: '3'
+services:
+  app:
+    ports:
+      - 3010:3000
+    image: sslguala-ce:latest
+    container_name: sslguala-ce
+    command: bash -c "bundle exec rails s -b 0.0.0.0 -p 3000"
+    environment:
+      - ENV=production
+      - RAILS_ENV=production
+      - REDIS_URL=redis://redis:6379/1
+      - POSTGRES_DATABASE=sslguala_production
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+    depends_on:
+      - redis
+      - db
+    volumes:
+      - ./log:/sslguala-ce/log
+      - ./public:/sslguala-ce/public # nginx 可以处理内容
+      - ./public:/sslguala-ce/public/ # nginx 可以处理内容
+      - ./public/assets:/sslguala-ce/public/assets # nginx 可以处理内容
+      - ./public/packs:/sslguala-ce/public/packs # nginx 可以处理内容
+      - ./tmp/pids:/sslguala-ce/tmp/pids
+  db:
+    image: postgres:10
+    volumes:
+      - "./datadir/postgresql:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  redis:
+    image: redis:4
+    volumes:
+      - './datadir/redis:/data'
+  web:
+    image: sslguala-ui-ce:latest
+    container_name: sslguala-ui-ce
+    command

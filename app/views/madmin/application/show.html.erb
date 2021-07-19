@@ -1,0 +1,24 @@
+<div class="flex justify-between">
+  <h1><%= link_to resource.friendly_name.pluralize, resource.index_path %> / <%= resource.model.name.singularize %> #<%= @record.id %></h1>
+
+  <div class="flex px-4">
+    <%= link_to "Edit", resource.edit_path(@record), class: "mr-2" %>
+    <%= button_to "Delete", resource.show_path(@record), method: :delete, data: { confirm: "Are you sure?" }, class: "inline-block" %>
+  </div>
+</div>
+
+<% resource.attributes.each do |attribute| %>
+  <% next if attribute[:field].nil? %>
+  <% next unless attribute[:field].visible?(action_name) %>
+  <% field = attribute[:field] %>
+
+  <div class="flex py-2">
+    <div class="w-32 flex-shrink-0 text-gray-700 uppercase tracking-wide text-sm">
+      <%= field.attribute_name.to_s.titleize %>
+    </div>
+
+    <div>
+      <%= render partial: field.to_partial_path("show"), locals: { field: field, record: @record } %>
+    </div>
+  </div>
+<% end %>

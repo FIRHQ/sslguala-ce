@@ -1,0 +1,9 @@
+<div class="text-sm">
+  <%= link_to "← 回到首页", main_app.root_url, class: "block p-1", data: { turbo: false } if main_app.respond_to?(:root_url) %>
+
+  <%= link_to "Dashboard", '/madmin' %>  
+  <% Madmin.resources.each do |resource| %>
+    <%= link_to resource.friendly_name.pluralize, resource.index_path, class: "block p-1" %>
+  <% end %>
+  <%= link_to "退出", destroy_user_session_path, method: :delete %>
+</div>

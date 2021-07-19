@@ -1,0 +1,1 @@
+json.(project, :id, :name, :description, :check_domains_count)

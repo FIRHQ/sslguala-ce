@@ -1,0 +1,57 @@
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 100px;">
+<h2>管理员登录</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <% if flash[:notice] %>
+    <div class="alert alert-success">
+      <%= flash[:notice] %>
+    </div>
+  <% elsif flash[:alert] %>
+    <div class="alert alert-danger">
+      <%= flash[:alert]  %>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= f.label '邮箱' %>
+    <%= f.text_field :login, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label '密码' %>
+    <%= f.password_field :password, autocomplete: "current-password" %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="" style="margin-left: 30px;">
+      <%= f.check_box :remember_me %>
+      <%= f.label '记住我' %>
+    </div>
+  <% end %>
+
+  <div class="actions btn">
+    <%= f.submit "登录", class: 'login' %>
+  </div>
+<% end %>
+
+<%= render "users/shared/links" %>
+</div>
+
+<style>
+  .field {
+    margin-top: 10px;
+  }
+  .field input {
+    width: 200px;
+    height: 20px;
+  }
+  .login {
+    margin-top: 20px;
+    width: 140px;
+    background: cornflowerblue;
+    color: white;
+    border: none;
+    height: 30px;
+    margin-left: 40px;
+  }
+</style>

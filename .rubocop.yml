@@ -1,0 +1,8 @@
+Style/ClassAndModuleChildren:
+  Enable: false
+
+AllCops:
+  TargetRubyVersion: 2.7
+
+Style/AsciiComments:
+  Enable: false

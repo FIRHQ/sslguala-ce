@@ -1,0 +1,24 @@
+[Unit]
+Description=sidekiq for sslguala (production)
+After=syslog.target network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/www/sslguala/current
+ExecStart=/home/deploy/.rvm/bin/rvm 2.7.3 do bundle exec sidekiq -e production
+ExecReload=/bin/kill -TSTP $MAINPID
+ExecStop=/bin/kill -TERM $MAINPID
+StandardOutput=append:/var/www/sslguala/shared/log/sidekiq.log
+StandardError=append:/var/www/sslguala/shared/log/sidekiq.error.log
+
+
+
+
+
+RestartSec=1
+Restart=on-failure
+
+SyslogIdentifier=sidekiq
+
+[Install]
+WantedBy=default.target

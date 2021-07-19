@@ -1,0 +1,47 @@
+<div class="flex justify-between">
+  <h1><%= resource.friendly_name.pluralize %></h1>
+  <%= link_to "新建 #{resource.friendly_name}", resource.new_path %>
+</div>
+
+<div>
+  <% if resource.scopes.any? %>
+    <%= link_to "全部", resource.index_path %>
+  <% end %>
+
+  <% resource.scopes.each do |scope| %>
+    <%= link_to scope.to_s.humanize, resource.index_path(scope: scope) %>
+  <% end %>
+</div>
+
+<table class="table-auto">
+  <thead>
+    <tr>
+      <% resource.attributes.each do |attribute| %>
+        <% next if attribute[:field].nil? %>
+        <% next unless attribute[:field].visible?(action_name) %>
+
+        <th><%= sortable attribute[:name], attribute[:name].to_s.titleize %></th>
+      <% end %>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @records.each do |record| %>
+      <tr>
+        <% resource.attributes.each do |attribute| %>
+          <% next if attribute[:field].nil? %>
+          <% next unless attribute[:field].visible?(action_name) %>
+
+          <% field = attribute[:field] %>
+
+          <td><%= render partial: field.to_partial_path("index"), locals: { field: field, record: record } %></td>
+        <% end %>
+
+        <td><%= link_to "查看", resource.show_path(record) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%== pagy_nav(@pagy) if @pagy.pages > 1 %>

@@ -1,0 +1,1 @@
+json.partial! "msg_channel", msg_channel: @msg_channel

@@ -1,0 +1,7 @@
+:schedule:
+  domain_schedule:
+    every: 4 hours
+    class: DomainScheduleWorker
+  domain_dead_schedule:
+    every: 1 day
+    class: DomainDeadCheckScheduleWorker

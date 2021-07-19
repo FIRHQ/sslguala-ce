@@ -17,7 +17,7 @@ gem 'redis', '~> 4.0'
 gem 'api_tools'
 gem 'sentry-raven'
 gem 'public_suffix'
-
+gem 'foreman'
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
 gem 'newrelic_rpm'

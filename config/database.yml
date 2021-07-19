@@ -84,4 +84,4 @@ production:
   database: <%= ENV['SSLGUALA_DATABASE'] || 'sslguala_production' %>
   username: <%= ENV['SSLGUALA_USERNAME'] %>
   password: <%= ENV['SSLGUALA_DATABASE_PASSWORD'] || 'sslguala' %>
-  pool: <%= ENV['SSLGUALA_DATABASE_pool'] || 30 %>
+  pool: <%= ENV['SSLGUALA_DATABASE_POOL'] || 30 %>

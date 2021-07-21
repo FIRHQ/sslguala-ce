@@ -81,7 +81,8 @@ test:
 #
 production:
   <<: *default
-  database: <%= ENV['SSLGUALA_DATABASE'] || 'sslguala_production' %>
-  username: <%= ENV['SSLGUALA_USERNAME'] %>
-  password: <%= ENV['SSLGUALA_DATABASE_PASSWORD'] || 'sslguala' %>
+  database: <%= ENV['POSTGRES_DATABASE'] || 'sslguala_production' %>
+  username: <%= ENV['POSTGRES_USERNAME'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] || 'sslguala' %>
   pool: <%= ENV['SSLGUALA_DATABASE_POOL'] || 30 %>
+  host: <%= ENV['POSTGRES_HOST'] %>

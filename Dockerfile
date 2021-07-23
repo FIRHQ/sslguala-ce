@@ -24,8 +24,8 @@ WORKDIR $APP_HOME
 ADD Gemfile Gemfile.lock $APP_HOME/
 RUN bundle config set without 'development test'
 RUN bundle install --jobs=20
+RUN bundle exec rails assets:precompile RAILS_PRECOMPILE=1 RAILS_ENV=production SECRET_KEY_BASE=fake_secure_for_compile
 
 COPY . $APP_HOME
-#RUN bundle exec rails assets:precompile RAILS_PRECOMPILE=1 RAILS_ENV=production SECRET_KEY_BASE=fake_secure_for_compile
 # CMD ["foreman", "start"]
 # docker build -t firhq/sslguala-ce:1.0 .

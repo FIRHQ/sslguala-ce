@@ -37,5 +37,6 @@ yarn-debug.log*
 .yarn-integrity
 TAGS
 
+/datadir
 # Ignore application configuration
 # /config/application.yml

@@ -56,7 +56,7 @@ Rails.application.routes.draw do
                passwords: 'users/passwords',
                omniauth_callbacks: 'users/omniauth_callbacks'
              }
-  root to: 'madmin/users#index'
+  root to: 'home#index'
 
   get 'policy', to: 'home#policy'
 
